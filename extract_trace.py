@@ -262,6 +262,13 @@ def show_traces(trace_scale=50, show_dms=True):
           (0.0, 0.4470588235294118, 0.6980392156862745),
           (0.0, 0.6196078431372549, 0.45098039215686275)]
     
+    #for i in range(5):
+    #    cp[i] = plt.cm.Spectral(i/3.)
+    cp[0] = 'navy'
+    cp[1] = 'steelblue'
+    cp[2] = 'coral'
+    cp[3] = 'darkred'
+        
     #rot_trace = np.load('rot_trace.npy', encoding='latin1', allow_pickle=True)[0]
     
     #grism_actpos = np.load('grism_actpos.npy', encoding='latin1', allow_pickle=True)[0]
@@ -284,6 +291,7 @@ def show_traces(trace_scale=50, show_dms=True):
     #fig = plt.figure(figsize=[12,6])
     fs = [6.5,3.46]
     fs = [6.5, 3.3]
+    fs = [7, 3.1*7/6.5]
     #fig = plt.figure(figsize=fs)
     fig, axes = plt.subplots(1,2,figsize=fs, sharey=True, 
                             gridspec_kw={'width_ratios':[1,2300./3000]})
@@ -338,7 +346,7 @@ def show_traces(trace_scale=50, show_dms=True):
                         label[1] = xy[0] - dy
                         
                 ax.scatter(scatter[0], scatter[1], color=color, 
-                           alpha=0.5, marker='s', s=8)
+                           alpha=0.5, marker='.', s=12)
                            
                 if '09' in filter:
                     ax.plot(label[0], label[1], color='k', alpha=0.4)
@@ -359,7 +367,7 @@ def show_traces(trace_scale=50, show_dms=True):
                 if gr == 'R':
                     ax.text(xy[1]+30 - 70*(pos in [5,2]), 
                             xy[0]+60 + 20*(pos in [5,2]), 
-                    '%d' %(pos), ha='left', va='bottom', fontsize=9)
+                    '%d' %(pos), ha='left', va='bottom', fontsize=8)
                     
                     ax.text(830, 1200, r'$\lambda$', 
                             rotation=0, fontsize=8, ha='center', 
@@ -368,7 +376,7 @@ def show_traces(trace_scale=50, show_dms=True):
                             rotation=260, fontsize=8, ha='center', 
                             color='0.4')
                 else:
-                    ax.text(xy[1], xy[0]+60, '%d' %(pos), ha='center', va='bottom', fontsize=9)
+                    ax.text(xy[1], xy[0]+60, '%d' %(pos), ha='center', va='bottom', fontsize=8)
                     ax.text(1040, 680, r'$\leftarrow \lambda$', 
                             rotation=-5, fontsize=8, ha='left', color='0.4')
     
@@ -401,9 +409,13 @@ def show_traces(trace_scale=50, show_dms=True):
         ax.set_xticks(range(0,2050,512))
         ax.set_xticklabels([])
         
-        ax.text(0, 2100, 'GR150'+gr, ha='left', va='bottom', fontsize=10)
+        if gr == 'R':
+            ax.text(40, 1950, 'GR150'+gr, ha='left', va='top', fontsize=10)
+        else:
+            ax.text(40, 1700, 'GR150'+gr, ha='left', va='top', fontsize=10)
+        
         if show_dms:
-            ax.set_ylim(-450, 2200)
+            ax.set_ylim(-450, 2150)
             
         if 0:
             ax.grid()
@@ -422,9 +434,9 @@ def show_traces(trace_scale=50, show_dms=True):
                               rotation=0, fontsize=8)
     
     for i, filter in enumerate(['F090W', 'F115W', 'F150W', 'F200W']):
-        axes[0].text(1220 + 480*(i % 2), -100-130*(i > 1), filter, ha='left', va='top', color=cp[i], size=8)
+        axes[0].text(0 + 380*(i % 4), -100-0*(i > 1), filter, ha='left', va='top', color=cp[i], size=9)
     
-    fig.axes[0].text(0, -150, r'Cross dispersion $\times$ {0:.0f}'.format(trace_scale), ha='left', va='top', color='k', size=8)
+    fig.axes[0].text(0, -240, r'Cross dispersion $\times$ {0:.0f}'.format(trace_scale), ha='left', va='top', color='k', size=9)
     
     fig.tight_layout(pad=0.0, w_pad=0.0)
     #fig.savefig('full_trace_DMS_v2.pdf')
