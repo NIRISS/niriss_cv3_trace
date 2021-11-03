@@ -369,7 +369,7 @@ def show_traces(trace_scale=50, show_dms=True):
                             xy[0]+60 + 20*(pos in [5,2]), 
                     '%d' %(pos), ha='left', va='bottom', fontsize=8)
                     
-                    ax.text(830, 1200, r'$\lambda$', 
+                    ax.text(830, 1200, r'$\lambda^{+1}$', 
                             rotation=0, fontsize=8, ha='center', 
                             color='0.4')
                     ax.text(810, 1100, r'$\rightarrow$', 
@@ -377,7 +377,7 @@ def show_traces(trace_scale=50, show_dms=True):
                             color='0.4')
                 else:
                     ax.text(xy[1], xy[0]+60, '%d' %(pos), ha='center', va='bottom', fontsize=8)
-                    ax.text(1040, 680, r'$\leftarrow \lambda$', 
+                    ax.text(1040, 680, r'$\leftarrow \lambda^{+1}$', 
                             rotation=-5, fontsize=8, ha='left', color='0.4')
     
         ax.plot([0,2040,2040,0,0], [0,0,2040,2040,0], color='k', alpha=0.5, zorder=-100)
